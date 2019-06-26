@@ -9,6 +9,10 @@
 ### 相关库的使用
     https://github.com/coreyti/showdown/
     http://code.google.com/p/google-code-prettify/
+
+    https://github.com/showdownjs/showdown
+    https://github.com/showdownjs/table-extension
+    
     vue2
     lodash
 

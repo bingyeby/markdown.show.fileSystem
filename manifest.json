@@ -11,7 +11,13 @@
 	},
 	"permissions": ["tabs", "\u003Call_urls\u003E"],
 	"content_scripts": [{
-		"js": ["markdownreader.js", "marked.min.js", "showdown.js", "highlight.min.js"],
+		"js": [
+            "markdownreader.js",
+            "marked.min.js",
+            "showdown.min.js",
+            "showdown-table.min.js",
+            "highlight.min.js"
+        ],
 		"matches": ["*://*/*.md", "file://*/*.md", "*://*/*.markdown", "file://*/*.markdown", "*://*/*.mdown", "file://*/*.mdown", "*://*/*.mkdn", "file://*/*.mkdn", "*://*/*.mkd", "file://*/*.mkd", "*://*/*.text", "file://*/*.text", "*://*/*.mdtext", "file://*/*.mdtext", "*://*/*.mdtxt", "file://*/*.mdtxt"],
 		"run_at": "document_end"
 	}],

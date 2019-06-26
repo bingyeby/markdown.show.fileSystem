@@ -44,7 +44,7 @@
 		if (text !== lastText) {
 			lastText = text;
 			// document.getElementById('markdown-container').innerHTML = marked(lastText);
-			var converter = new showdown.Converter()
+			var converter = new showdown.Converter({extensions: ['table']})
 			document.getElementById('markdown-container').innerHTML = converter.makeHtml(lastText);
 			
 			document.querySelectorAll('pre code').forEach(function (block) {

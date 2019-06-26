@@ -115,15 +115,23 @@ dd{margin-left:2em;margin-bottom:1em;}
 
 #markdown-backTop{
 	position: fixed;
-	right:0px;
+    right:50%;
+    transform: translate(50%);
 	bottom:0px;
 	padding:5px;
-	width:300px;
-	height:10px;
-	background: #F8F8F8;
+	width:100px;
+	height:100px;
+    background: transparent;
+    font-size: 20px;
 
-	border:1px solid #ccc;
-	cursor:pointer;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(180deg,transparent 10%, #00ffd570 20%,#008cffa4 90%);
+    color: white;
+    cursor:pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    
 }
 
 /*table style*/
@@ -149,6 +157,6 @@ table p{
 
 code{
 	border: 2px solid lightgray;
-	border-radius: 8px;
+	border-radius: 5px;
 	margin-bottom: 5px;
 }
