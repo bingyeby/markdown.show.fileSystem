@@ -213,7 +213,7 @@ code{
     height: 9px;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: #dddddd;
+    background-color:  #BFBFBF;
     background-clip: padding-box;
     min-height: 28px;
 }
