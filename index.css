@@ -156,7 +156,7 @@ table p{
 }
 /* code */
 code{
-	border: 2px solid lightgray;
+	border: 1px solid lightgray;
 	border-radius: 5px;
 	margin-bottom: 5px;
 }
