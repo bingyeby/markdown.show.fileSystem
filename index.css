@@ -159,6 +159,7 @@ code{
 	border: 1px solid lightgray;
 	border-radius: 5px;
 	margin-bottom: 5px;
+    user-select: none;
 }
 
 /* 导航 */

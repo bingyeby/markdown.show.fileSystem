@@ -23,6 +23,48 @@
 
 	var lastText = null;
 
+
+  /**
+   * 拖动内容，滚动条滚动，横向
+   * @param {string} container 需要拖动的面板
+   */
+  function dragMoveX(container) {
+    console.log(`dragMoveX 1`, 1);
+    var flag;
+    var downX;
+    var scrollLeft;
+
+    container.addEventListener("mousedown", function (event) {
+      flag = true;
+      downX = event.clientX;
+      scrollLeft = this.scrollLeft;
+    });
+
+    container.addEventListener("mousemove", function (event) {
+      if (flag) {
+        var moveX = event.clientX;
+        var scrollX = moveX - downX;
+        if (scrollX < 0 && scrollLeft > 0) {
+          this.scrollLeft=scrollLeft - scrollX
+        }
+        else {
+          this.scrollLeft=scrollLeft - scrollX
+        }
+      }
+    });
+
+    container.addEventListener("mouseup", function () {
+      flag = false;
+    });
+
+    container.addEventListener("mouseout", function (event) {
+      if (event.pageX < 0 || event.pageX > document.body.offsetWidth) {
+        flag = false;
+      }
+    });
+  }
+
+
   window.addEventListener('load', function () {
     // marked插件的基本配置(存在问题: '1. a \n * b' 展示有误)
     // marked.setOptions({
@@ -139,6 +181,10 @@
 			});
 
 			updateOutline();
+
+      _.each(document.querySelectorAll('pre code'), (n) => {
+        dragMoveX(n)
+      })
 		}
 	}
 
