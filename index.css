@@ -4,10 +4,10 @@
 	font-family: Consolas, 'Courier New', monospace;
 	word-break:break-all;
 }
+body{
+    background-color: #F8F8F8;
+}
 #markdown-container{
-	background-color: #F8F8F8;
-	border:1px solid #ccc;
-	box-shadow:0 0 10px #999;
 	padding:10px 250px 10px 10px;
 	line-height:1.4em;
     font:13.34px helvetica,arial,freesans,clean,sans-serif;
@@ -81,9 +81,9 @@ dd{margin-left:2em;margin-bottom:1em;}
 #markdown-outline{
 	display:none;
 	position:fixed;
-	top:10px;
+	top:0;
 	max-width: 230px;
-	right: 10px;
+	right: 5px;
 	background-color:rgb(255, 255, 255);
 	overflow-y: auto;
 	box-sizing: border-box;
@@ -156,9 +156,65 @@ table p{
 	margin: 0;
 
 }
-
+/* code */
 code{
-	border: 1px solid rgb(145, 145, 145);
-	border-radius: 3px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
 	margin-bottom: 5px;
+    user-select: none;
+}
+
+/* 导航 */
+#linkList {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    height: 50vh;
+    overflow: auto;
+    width: 1px;
+    z-index: 1000;
+    background: white;
+    border:1px solid #ccc;
+    box-shadow:0 0 10px #999;
+}
+#linkList:hover {
+    width: 100%;
+}
+#linkList > div {
+}
+.linkLi {
+    cursor: pointer;
+    border-right: 1px solid lightcoral;
+    border-left: 1px solid lightcoral;
+    margin: 2px 0;
+}
+.linkLi.md {
+    font-weight: bolder;
+    border-left: 2px solid lightcoral;
+    border-right: 2px solid lightcoral;
+}
+.linkLiHeader {
+    cursor: context-menu;
+    background: lightcoral;
+    color: white;
+    border-right: 1px solid white;
+    min-width: 200px;
+    max-width: 300px;
+    white-space: nowrap;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #dddddd;
+    background-clip: padding-box;
+    min-height: 28px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
 }
