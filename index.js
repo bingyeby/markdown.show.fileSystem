@@ -199,8 +199,15 @@
 
 			updateOutline();
 
+      // 横向滚动支持横向块拖动
       _.each(document.querySelectorAll('pre code'), (n) => {
         dragMoveX(n)
+      })
+      // 图片点击可以在新的标签打开
+      document.querySelectorAll('img').forEach((n) => {
+        n.addEventListener('click', () => {
+          window.open(n.src)
+        })
       })
 		}
 	}
