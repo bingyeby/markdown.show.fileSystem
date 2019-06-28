@@ -8,7 +8,7 @@ body{
     background-color: #F8F8F8;
 }
 #markdown-container{
-	padding:10px 250px 10px 10px;
+	padding:10px 250px 10px 20px;
 	line-height:1.4em;
     font:13.34px helvetica,arial,freesans,clean,sans-serif;
     color:black;
@@ -121,11 +121,14 @@ dd{margin-left:2em;margin-bottom:1em;}
 	padding:5px;
 	width:100px;
 	height:100px;
-    background: transparent;
     font-size: 20px;
 
     border-radius: 50%;
-    background: radial-gradient(#2499ffcc 10%,#d1fff791 70%,transparent 90%);
+    /*background: radial-gradient(#2499ffcc 10%,#d1fff791 70%,transparent 90%);*/
+    background-image: url(images/up.png);
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    background-size: 20% 20%;
     color: transparent;
     cursor:pointer;
     display: flex;
@@ -133,7 +136,10 @@ dd{margin-left:2em;margin-bottom:1em;}
     justify-content: center;
 }
 #markdown-backTop:hover{
-    background: radial-gradient(#008cffc2 20%,#00ffd538 80%,transparent 90%);
+    /*background: radial-gradient(#008cffc2 20%,#00ffd538 80%,transparent 90%);*/
+    background-image: url(images/up.active.png);
+    background-position: center top;
+    transition: background-position 500ms ease-out;
 }
 
 /*table style*/
@@ -172,38 +178,52 @@ code{
     display: flex;
     height: 50vh;
     overflow: auto;
-    width: 1px;
+    width: 0px;
     z-index: 1000;
     background: rgb(253, 253, 253);
     border:1px solid #ccc;
-    box-shadow:0 0 20px #999;
+    box-shadow:0 0 20px 5px rgb(185, 185, 185);
 }
 #linkList:hover {
     width: 100%;
-    transition: width 500ms ease-out;
+    transition: width 300ms ease-out;
 }
 #linkList > div {
+    background: rgba(0, 0, 0, 0.03);
     max-height: 100%;
     overflow: auto;
     padding-left: 10px ;
-    box-shadow: 10px 0 15px #999;
+    box-shadow: 10px 0 10px rgba(153, 153, 153, 0.55);
 }
 .linkLi {
     cursor: pointer;
-    margin: 0 0 2px 0;
+    padding: 0 50px 0 2px;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 100px;
+    max-width: 300px;
 }
 .linkLi.md {
     font-weight: bolder;
+}
+.linkLi.folder {
+    background-image: url(images/folder.png);
+    background-repeat: no-repeat;
+    background-position: 98% center;
+    background-size: auto 50%;
+}
+.linkLi.folderActive {
+    background-image: url(images/folder.active.png);
+    background-repeat: no-repeat;
+    background-position: 98% center;
+    background-size: auto 50%;
 }
 .linkLiHeader {
     cursor: context-menu;
     background: lightcoral;
     color: white;
     border-right: 1px solid white;
-    min-width: 200px;
-    max-width: 300px;
-    white-space: nowrap;
 }
 ::-webkit-scrollbar-track-piece {
     background-color: transparent;

@@ -106,11 +106,13 @@
       let addRowStr = str.match(/addRow\(\".+\"\)/gi)
       let rowList = []
       if (addRowStr) {
-        rowList = _.map(addRowStr, (n) => { // n: "addRow("test.md","知识点 面试点.md",0,36182,"35.3 kB",1561428649,"2019/6/25 上午10:10:49")"
+        rowList = _.map(addRowStr, (n) => { // n: `addRow("test.md","知识点 面试点.md",0,36182,"35.3 kB",1561428649,"2019/6/25 上午10:10:49")`
           let name = n.split(',')[0].split("\"")[1] // test.md
+          let type =  n.split(',')[2]
           return {
-            name: name,
-            url: basicUrl + name
+            name,
+            url: basicUrl + name +'\/',
+            type,
           }
         })
       }
@@ -121,46 +123,61 @@
     new Vue({
       el: '#test',
       data: {
+        currentUrlList:['11','21'],
         linkList: [
-          {name: '1', url: '1', child: [{name: '11', url: '11'}, {name: '12', url: '12'}]},
-          {name: '2', url: '1', child: [{name: '11', url: '11'}, {name: '12', url: '12'}]},
+          [{name: '11', url: '11'}, {name: '12', url: '12'}],
+          [{name: '21', url: '21'}, {name: '22', url: '22'}]
         ],
       },
       created() {
-        this.linkList = _.map(window.location.href.split('\/'), (n, i, list) => {
-          return {
+        this.currentUrlList = window.location.href.split('\/')
+        this.linkList = _.map(this.currentUrlList, (n, i, list) => {
+          return [{
+            active: true,
             name: n,
             url: _.slice(list, 0, i + 1).join('\/') + '\/'
-          }
+          }]
         })
         // 默认展开最后一个
-        this.showChild(_.size(this.linkList) - 2)
+        this.showChild(_.size(this.linkList) - 2, 0)
+        this.showChild(_.size(this.linkList) - 3, 0)
       },
       methods: {
-        linkOpen: (url) => {
-          console.log(`linkOtherMd url`, url);
-          window.open(url, '_self')
-        },
-        showChild(index) {
-          let name = this.linkList[index].name
-          let url = this.linkList[index].url
+        showChild(index, childLiIndex) {
+          let childList = this.linkList[index][childLiIndex]
+          let name = childList.name
+          let url = childList.url
+          _.each(this.linkList[index], (n, i) => {
+            n.active = childLiIndex === i
+          })
           if ((name === '') || (name === 'file:') || (name === 'D:')) {
             return
           }
-          httpRequest(url).then((str) => {
-            // this.linkList[index].child = dealResponseText(str, url) // 直接改变不生效 在 vue 中是无法检测到根据索引值修改的数据变动的
-            Vue.set(this.linkList[index], `child`, dealResponseText(str, url))
-          })
+          if (childList.type === '0') {
+            if (/\.md$/.test(name)) {
+              window.open(url.replace(/\/$/, ''), '_self')
+            } else {
+              if (/\.png$/.test(name)) {
+                window.open(url.replace(/\/$/, ''))
+              }
+            }
+          } else {
+            httpRequest(url).then((str) => {
+              // 在vue中是无法检测到根据索引值修改的数据变动的,需要通过Vue.set()
+              Vue.set(this.linkList, [index + 1], dealResponseText(str, url))
+            })
+          }
         }
       },
       template: `<div id='test'>
         <div id="linkList">
-            <div v-for="(item,index) in linkList" v-if="!_.includes(['','file:','D:'],item.name)">
-                <div @click="showChild(index)" class="linkLi linkLiHeader">{{decodeURI(item.name)}}</div>
+            <div v-for="(item,index) in linkList" v-if="!_.includes(['','file:','D:'],item[0].name)">
                 <div 
-                    v-for="(childLi,childLiIndex) in item.child"
-                    :class="['linkLi',{'md' : /.md/.test(childLi.name)}]"
-                    @click="linkOpen(childLi.url)">
+                    v-for="(childLi,childLiIndex) in item"
+                    :class="['linkLi',{'md' : /.md$/.test(childLi.name)},{'folder': childLi.type === '1' },{'folderActive': childLi.active }]"
+                    :title="childLi.name"
+                    :data-url="childLi.url"
+                    @click="showChild(index,childLiIndex)">
                     {{childLi.name}}
                 </div>
             </div>
