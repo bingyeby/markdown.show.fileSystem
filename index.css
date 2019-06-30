@@ -23,7 +23,7 @@ input[type=text],input[type=password],input[type=image],textarea{font:99% helvet
 select,option{padding:0 .25em;}
 optgroup{margin-top:.5em;}
 
-img{border:0;max-width:50%;max-height: 50vh;}
+img{border:0;max-width:50%;max-height: 50vh;display:block;}
 abbr{border-bottom:none;}
 a{color:#4183c4;text-decoration:none;}
 a:hover{text-decoration:underline;}
@@ -116,15 +116,14 @@ dd{margin-left:2em;margin-bottom:1em;}
 #markdown-backTop{
 	position: fixed;
     right:50%;
-    transform: translate(50%,50%);
+    transform: translate(50%);
 	bottom:0px;
 	padding:5px;
 	width:100px;
-	height:100px;
+	height:50px;
     font-size: 20px;
 
     border-radius: 50%;
-    /*background: radial-gradient(#2499ffcc 10%,#d1fff791 70%,transparent 90%);*/
     background-image: url(images/up.png);
     background-repeat: no-repeat;
     background-position: center 30%;
@@ -134,9 +133,9 @@ dd{margin-left:2em;margin-bottom:1em;}
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    transition: background-position 200ms ease-in;
 }
 #markdown-backTop:hover{
-    /*background: radial-gradient(#008cffc2 20%,#00ffd538 80%,transparent 90%);*/
     background-image: url(images/up.active.png);
     background-position: center top;
     transition: background-position 500ms ease-out;
@@ -167,7 +166,6 @@ code{
 	border: 1px solid lightgray;
 	border-radius: 5px;
 	margin-bottom: 5px;
-    user-select: none;
 }
 
 /* 导航 */
