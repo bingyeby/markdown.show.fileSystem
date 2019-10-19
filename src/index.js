@@ -167,7 +167,7 @@ function httpRequest(url) {
       },
       template: `<div>
         <div id="linkList">
-            <div v-for="(item,index) in linkList" v-if="!_.includes(['','file:'],item[0].name)">
+            <div v-for="(item,index) in linkList" v-if="!_.includes(['file:','','D:'],item[0].name)">
                 <div 
                     v-for="(childLi,childLiIndex) in item"
                     :class="['linkLi',{'md' : /.md$/.test(childLi.name)},{'folder': childLi.type === '1' },{'folderActive': childLi.active }]"

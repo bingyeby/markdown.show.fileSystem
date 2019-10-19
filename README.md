@@ -4,6 +4,7 @@
 
 ### 安装目录
     chrome://extensions/
+    在配置中勾选允许访问文件系统
 
 ### 相关库的使用
     https://github.com/coreyti/showdown/
