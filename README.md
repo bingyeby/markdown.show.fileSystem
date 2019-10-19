@@ -31,3 +31,6 @@
      });
      document.getElementById('markdown-container').innerHTML = marked(lastText);
 
+### 效果
+![效果](readme.1.png)
+
